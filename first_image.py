@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def image_search(query):
 	query = query.replace(' ', '+')
-	name = 'Food_images/'+str(query)+'.jpg'
+	name = str(query)+'.jpg'
 	url = 'http://www.freedigitalphotos.net/images/search.php?search='+str(query)
 	r = requests.get(url)
 	sauce = r.content
@@ -12,4 +12,4 @@ def image_search(query):
 	div = soup.find('div', {'class':'similar-premium'})
 	request.urlretrieve(div.img['src'], name)
 
-image_search('turkish bread')
+image_search('cutie pie')

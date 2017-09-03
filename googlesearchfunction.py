@@ -18,4 +18,4 @@ def google_search(query):
 	    request.urlretrieve(str(image['src']),name)
 	    if i>2:
 	    	break
-google_search('tortilla')
+google_search('cutie pie')
