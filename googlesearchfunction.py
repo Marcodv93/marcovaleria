@@ -1,5 +1,9 @@
 ### google search for images function
+
 #test by valeria
+=======
+
+
 from urllib import request
 import requests
 from bs4 import BeautifulSoup
@@ -15,11 +19,12 @@ def google_search(query):
 	i=0
 	for image in myimages:
 	    i+=1
-	    name=query+str(i)+'.jpg'
+	    name=query+str(i)+'.TIF'
 	    request.urlretrieve(str(image['src']),name)
 	    if i>2:
 	    	break
 google_search('cutie pie')
+
 
 
 def valeria_function(my_string):
@@ -38,3 +43,6 @@ def valeria_function(my_string):
 
 
 	
+=======
+# this is Marco modificationssss
+
