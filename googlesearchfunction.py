@@ -1,5 +1,9 @@
 ### google search for images function
 
+#test by valeria
+=======
+
+
 from urllib import request
 import requests
 from bs4 import BeautifulSoup
@@ -21,4 +25,24 @@ def google_search(query):
 	    	break
 google_search('cutie pie')
 
+
+
+def valeria_function(my_string):
+		
+	if my_string == "valeria":
+		print("i love you")
+	else:
+		print("i love you more")
+
+
+
+
+
+
+
+
+
+	
+=======
 # this is Marco modificationssss
+
