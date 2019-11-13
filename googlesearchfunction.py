@@ -15,7 +15,7 @@ def google_search(query):
 	i=0
 	for image in myimages:
 	    i+=1
-	    name=query+str(i)+'.png'
+	    name=query+str(i)+'.TIF'
 	    request.urlretrieve(str(image['src']),name)
 	    if i>2:
 	    	break
