@@ -20,3 +20,21 @@ def google_search(query):
 	    if i>2:
 	    	break
 google_search('cutie pie')
+
+
+def valeria_function(my_string):
+		
+	if my_string == "valeria":
+		print("i love you")
+	else:
+		print("i love you more")
+
+
+
+
+
+
+
+
+
+	
