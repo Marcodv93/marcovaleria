@@ -1,4 +1,4 @@
-### FIND OUT HOW TO CHANGE FROM PAGE TO PAGE ####
+### AM I DOING THE RIGHT THING AT THE BOTTOM? SHOULD I SEPARATE THE CONTROLS FROM THE PAGE? ####
 
 
 import tkinter as tk
@@ -28,10 +28,10 @@ class frame_master(tk.Frame):
         frame = self.frames[cont]
         frame.tkraise()
 
-class start_page(tk.Frame):
-    def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
-        master_frame = frame_master(app, "LEFT", "RIGHT")
+class page(tk.Frame):
+    def __init__(self, left_text, right_text):
+        tk.Frame.__init__(self)
+        master_frame = frame_master(app, left_text, right_text)
 
         frame_controls = tk.Frame(master_frame, height=100, width=1600, bg="green")
         frame_controls.place(x=0, y=800)
@@ -52,9 +52,31 @@ class start_page(tk.Frame):
     def decrease_page(self, page_number):
         if page_number.get()>1:
             page_number.set(page_number.get()-1)
+    def show(self):
+        self.lift()
 
-start_page = start_page(app)
+pages_dictionary = {}
+for page_number in range(1, 7):
+    if page_number%2 == 0:
+        pages_dictionary[page_number] = "RIGHT" + str(page_number)
+    else:
+        pages_dictionary[page_number] = "LEFT" + str(page_number) 
 
-#second_frame = frame_master(app, "sinistra", "destra")
+pages = []
+for page_number, text in pages_dictionary.items():
+    if page_number%2 != 0:
+        left_text = text
+    pages.append(page(left_text, text))
 
+class MainView(tk.Frame):
+    def __init__(self, *args, **kwargs):
+        tk.Frame.__init__(self, *args, **kwargs)
+        container = tk.Frame(self)
+        self.pages = pages
+        for page in pages:
+            page.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        pages[0].show()
+  
+main = MainView(app)
+main.pages[0].show()
 app.mainloop()
