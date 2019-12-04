@@ -1,4 +1,4 @@
-### FIND OUT HOW BUTTONS WORK AND HOW TO CHANGE FROM PAGE TO PAGE ####
+### FIND OUT HOW TO CHANGE FROM PAGE TO PAGE ####
 
 
 import tkinter as tk
@@ -23,27 +23,37 @@ class frame_master(tk.Frame):
         label_rightpage = tk.Label(frame_rightpage, text=rightpage_text)
         label_rightpage.place(relx=0.5,rely=0.5)
 
-first_frame = frame_master(app, "LEFT", "RIGHT")
 
-def buttonfunction(variable):
-    output_to_print = "random string"
-    variable.set(output_to_print)
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
+class start_page(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent)
+        master_frame = frame_master(app, "LEFT", "RIGHT")
 
-frame_controls = tk.Frame(app, height=100, width=1600, bg="green")
-frame_controls.place(x=0, y=800)
+        frame_controls = tk.Frame(master_frame, height=100, width=1600, bg="green")
+        frame_controls.place(x=0, y=800)
 
-button_previous = tk.Button(frame_controls, text ="Previous Page")
-button_previous.place(x=10, y=25,relheight=0.5, relwidth=0.2)
+        button_previous = tk.Button(frame_controls, text ="Previous Page", command=lambda: self.decrease_page(page_counter))
+        button_previous.place(x=10, y=25,relheight=0.5, relwidth=0.2)
 
-string_counter = tk.StringVar()
-string_counter.set("Valeria ti amo")
-label_counter = tk.Label(frame_controls, textvariable=string_counter)
-label_counter.place(x=800,y=25)
+        page_counter = tk.IntVar()
+        page_counter.set(1)
+        label_counter = tk.Label(frame_controls, textvariable=page_counter)
+        label_counter.place(x=800,y=25)
 
-button_next = tk.Button(frame_controls, text ="Next Page", command=buttonfunction(string_counter))
-button_next.place(anchor = "ne", x=1590, y=25, relheight=0.5, relwidth=0.2)
+        button_next = tk.Button(frame_controls, text ="Next Page", command=lambda: self.increase_page(page_counter))
+        button_next.place(anchor = "ne", x=1590, y=25, relheight=0.5, relwidth=0.2)
 
+    def increase_page(self, page_number):
+        page_number.set(page_number.get()+1)
+    def decrease_page(self, page_number):
+        if page_number.get()>1:
+            page_number.set(page_number.get()-1)
+
+start_page = start_page(app)
 
 #second_frame = frame_master(app, "sinistra", "destra")
 
