@@ -1,4 +1,4 @@
-### CHANGE TEXT IN LABEL INSTEAD OF CHANGING PAGE####
+### CHANGE TO CANVAS IF WE FIGURE OUT HOW TO ADD PICTURE AND MAKE TEXT TRANSPARENT####
 
 
 import tkinter as tk
@@ -18,10 +18,10 @@ class frame_master(tk.Frame):
         frame_rightpage = tk.Frame(self, height=800, width=800, bg='blue')
         frame_rightpage.place(x=800,y=0)
 
-        tkvar_left_text = tk.StringVar()
-        tkvar_left_text.set(pages_dictionary[1])
-        label_leftpage = tk.Label(frame_leftpage, textvariable=tkvar_left_text, width=70, height=35, font=("Helvetica", 14), wraplength = 700)
+        label_leftpage = tk.Canvas(frame_leftpage, width=800, height=800)
         label_leftpage.place(x=0,y=0)
+        tkvar_left_text = pages_dictionary[1]
+        self.tag_left_text = label_leftpage.create_text((5,10), anchor="nw", text=tkvar_left_text, width=800, font="Helvetica 16", justify="center")
 
         tkvar_right_text = tk.StringVar()
         tkvar_right_text.set(pages_dictionary[2])
@@ -43,7 +43,7 @@ class frame_master(tk.Frame):
         right_counter = tk.Label(frame_controls, textvariable=self.page_counter_right)
         right_counter.place(x=1200,y=25)
 
-        button_next = tk.Button(frame_controls, text ="Next Page", command=lambda: self.increase_page(tkvar_left_text, tkvar_right_text))
+        button_next = tk.Button(frame_controls, text ="Next Page", command=lambda: self.increase_page(label_leftpage, tkvar_right_text))
         button_next.place(anchor = "ne", x=1590, y=25, relheight=0.5, relwidth=0.2)
     def increase_page(self, tkvar_left_text, tkvar_right_text):
         if self.page_counter_right.get() < len(pages_dictionary.keys()):
@@ -55,8 +55,9 @@ class frame_master(tk.Frame):
             self.page_counter_left.set(self.page_counter_left.get()-2)
             self.page_counter_right.set(self.page_counter_right.get()-2)
             self.update_pages(tkvar_left_text, tkvar_right_text)
-    def update_pages(self, tkvar_left_text, tkvar_right_text):
-        tkvar_left_text.set(pages_dictionary[self.page_counter_left.get()])
+    def update_pages(self, label_leftpage, tkvar_right_text):
+        #tkvar_left_text.set(pages_dictionary[self.page_counter_left.get()])
+        label_leftpage.itemconfigure(self.tag_left_text, text=pages_dictionary[self.page_counter_left.get()])
         tkvar_right_text.set(pages_dictionary[self.page_counter_right.get()])
 
 
