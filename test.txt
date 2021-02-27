@@ -1,5 +1,5 @@
 this is a test text valeria
-XXXXXXXXXXXXXXXXXXX
+
 THIS IS A TEMPORARY LINE
 this is the pancake line
 this is the fourth line 000 modified by marco
